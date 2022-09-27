@@ -67,8 +67,8 @@ function displayLibrary() {
     });
 
     element.querySelector('.remove').addEventListener('click', () => {
-      element.remove();
       myLibrary.splice(i, 1);
+      displayLibrary();
     });
 
     container.appendChild(element);
