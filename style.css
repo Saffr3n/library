@@ -1,3 +1,42 @@
 body {
   margin: 0;
 }
+
+.new {
+  width: clamp(300px, 50%, 750px);
+  margin: 32px auto;
+  padding: 16px;
+  font-size: xx-large;
+  display: block;
+}
+
+form {
+  margin: 32px 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: small;
+}
+
+.container {
+  margin: 16px;
+  margin-top: 32px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.book {
+  border: 1px solid;
+  padding: 8px;
+  text-align: initial;
+}
