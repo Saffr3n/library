@@ -2,7 +2,12 @@ let myLibrary = [];
 
 const newBtn = document.querySelector('.new');
 const addBtn = document.querySelector('.add');
+
 const form = document.querySelector('form');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const read = document.querySelector('#read');
 
 class Book {
   constructor (title, author, pages, read) {
@@ -18,11 +23,16 @@ newBtn.addEventListener('click', () => {
   form.style.display = 'flex';
 });
 
-addBtn.addEventListener('click', () => {
-  const title = document.querySelector('#title');
-  const author = document.querySelector('#author');
-  const pages = document.querySelector('#pages');
-  const read = document.querySelector('#read');
+addBtn.addEventListener('click', e => {
+  for (const input of [title, author, pages]) {
+    errorHandler(input);
+    if (document.querySelector('.invalid')) return;
+  }
+
+  if (!pages.checkValidity()) {
+    pages.reportValidity();
+    return;
+  }
 
   addBookToLibrary(title.value, author.value, pages.value, read.checked);
   displayLibrary();
@@ -35,6 +45,10 @@ addBtn.addEventListener('click', () => {
   newBtn.style.display = 'block';
   form.style.display = 'none';
 });
+
+[title, author, pages].forEach(input => input.addEventListener('input', () => {
+  errorHandler(input);
+}));
 
 function addBookToLibrary (title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
@@ -74,6 +88,21 @@ function displayLibrary() {
     });
 
     container.appendChild(element);
+  }
+}
+
+function isValid (input) {
+  return input.value.trim() ? true : false;
+}
+
+function errorHandler (input) {
+  if (!isValid(input)) {
+    input.classList.add('invalid');
+    input.setCustomValidity('Please fill the field.');
+    input.reportValidity();
+  } else {
+    input.classList.remove('invalid');
+    input.setCustomValidity('');
   }
 }
 

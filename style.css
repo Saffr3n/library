@@ -40,3 +40,15 @@ form {
   padding: 8px;
   text-align: initial;
 }
+
+input:focus {
+  outline: 2px solid #55f;
+}
+
+.invalid {
+  background-color: #f55;
+}
+
+.invalid:focus {
+  outline: 2px solid #f00;
+}
